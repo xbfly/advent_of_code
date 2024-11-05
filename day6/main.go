@@ -20,7 +20,6 @@ func main() {
 
 	for scanner.Scan() {
 		x := strings.Split(scanner.Text(), ":")
-		// y := strings.TrimSpace(x[1])
 		y := strings.Fields(x[1])
 		dd := ""
 		for _, w := range y {
@@ -60,16 +59,11 @@ func main() {
 
 func buildTimeDistanceTable(t, d int) int {
 
-	// tdTable := map[int]int{}
 	total := 0
 
 	for i := 0; i <= t; i++ {
 		time := t - i
 		dist := time * i
-
-		// if dist == (t-i+1)*(i+1) {
-		// 	return total * 2
-		// }
 
 		if dist > d {
 			total++
