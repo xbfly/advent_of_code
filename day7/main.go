@@ -19,7 +19,7 @@ var (
 	highs      = []string{}
 )
 
-var trump = map[string]string{
+var trumpCard = map[string]string{
 	"A": "D",
 	"K": "C",
 	"Q": "B",
@@ -96,7 +96,7 @@ func convertToHex(s string) string {
 	var hexVal string
 
 	for i := 0; i < len(s); i++ {
-		hv := trump[string(s[i])]
+		hv := trumpCard[string(s[i])]
 		hexVal += hv
 	}
 
