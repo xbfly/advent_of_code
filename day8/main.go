@@ -48,7 +48,6 @@ func main() {
 
 	}
 
-	// Find the lengths of cycles for each starting node
 	cycleLengths := make([]int, 0, len(sp))
 	for _, startNode := range sp {
 		count := 0
@@ -72,7 +71,7 @@ func main() {
 			}
 
 			if strings.HasSuffix(currentNode, "Z") {
-				break // Exit outer loop when "Z" is reached
+				break
 			}
 		}
 	}
