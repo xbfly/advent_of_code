@@ -16,7 +16,6 @@ func main() {
 	var nums [][]int
 	for scanner.Scan() {
 		numString := scanner.Text()
-
 		numStrSplit := strings.Split(numString, " ")
 
 		ns := []int{}
@@ -26,13 +25,11 @@ func main() {
 		}
 
 		nums = append(nums, ns)
-
 	}
 
 	sum := 0
 	for _, n := range nums {
 		sum += differences(n)
-
 	}
 
 	fmt.Println(sum)

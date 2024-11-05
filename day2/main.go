@@ -17,7 +17,6 @@ func main() {
 
 	for scanner.Scan() {
 		x := strings.Split(scanner.Text(), ":")
-		// y := strings.TrimPrefix(x[0], "Game ")
 
 		z := strings.Split(x[1], ";")
 		powers = append(powers, ghost(z))

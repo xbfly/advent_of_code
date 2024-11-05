@@ -36,24 +36,19 @@ func main() {
 	}
 
 	for _, n := range number {
-		right := len(n) - 1
+		var nums string
+
 		var tmpLeft string
-		var tmpRight string
-
-		var tmp string
-
-		lbreak := false
-		rbreak := false
-
 		for _, l := range n {
+			lbreak := false
 			if unicode.IsNumber(l) {
-				tmp += string(l)
+				nums += string(l)
 				lbreak = true
 			} else {
 				tmpLeft += string(l)
 				for p := range ghost {
 					if strings.Contains(tmpLeft, p) {
-						tmp += ghost[p]
+						nums += ghost[p]
 						lbreak = true
 					}
 				}
@@ -65,16 +60,18 @@ func main() {
 
 		}
 
+		var tmpRight string
+		right := len(n) - 1
 		for i := right; i >= 0; i-- {
+			rbreak := false
 			if unicode.IsNumber(rune(n[i])) {
-				tmp += string(n[i])
+				nums += string(n[i])
 				rbreak = true
 			} else {
 				tmpRight = string(n[i]) + tmpRight
-				fmt.Println("tmpRight: ", tmpRight)
 				for p := range ghost {
 					if strings.Contains(tmpRight, p) {
-						tmp += ghost[p]
+						nums += ghost[p]
 						rbreak = true
 					}
 				}
@@ -84,7 +81,7 @@ func main() {
 			}
 		}
 
-		x, _ := strconv.Atoi(tmp)
+		x, _ := strconv.Atoi(nums)
 		newNums = append(newNums, x)
 	}
 
