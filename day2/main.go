@@ -37,16 +37,12 @@ func ghost(s []string) int {
 
 	for _, w := range s {
 		u := strings.Split(w, ",")
-		fmt.Println("U: ", u)
 
 		for _, v := range u {
 			vv := strings.TrimLeft(v, " ")
 			vp := strings.Split(vv, " ")
 
-			fmt.Println("VV: ", vv)
-			fmt.Println("VV[0]: ", vp[0])
 			num, _ := strconv.Atoi(vp[0])
-			fmt.Println("G: ", g)
 			if vp[1] == "blue" && num > b {
 				b = num
 			}
