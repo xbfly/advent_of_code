@@ -69,25 +69,12 @@ func main() {
 		for j := 0; j < seeds[i+1]; j++ {
 			seed := seeds[i] + j
 			soil = check(seed, seedToSoil)
-			// fmt.Println("soil: ", soil)
-
 			fertilizer = check(soil, soilToFertilizer)
-			// fmt.Println("fertilizer: ", fertilizer)
-
 			water = check(fertilizer, fertilizerToWater)
-			// fmt.Println("water: ", water)
-
 			light = check(water, waterToLight)
-			// fmt.Println("light: ", light)
-
 			temperature = check(light, lightToTemperature)
-			// fmt.Println("temperature: ", temperature)
-
 			humidity = check(temperature, temperatureToHumidity)
-			// fmt.Println("humidity: ", humidity)
-
 			location = check(humidity, humidityToLocation)
-			// fmt.Println("location: ", location)
 
 			if location < lowestLocation {
 				lowestLocation = location
