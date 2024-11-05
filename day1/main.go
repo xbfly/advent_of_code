@@ -48,7 +48,6 @@ func main() {
 		for _, l := range n {
 			if unicode.IsNumber(l) {
 				tmp += string(l)
-				// fmt.Println("tmp1: ", tmp)
 				lbreak = true
 			} else {
 				tmpLeft += string(l)
@@ -56,7 +55,6 @@ func main() {
 					if strings.Contains(tmpLeft, p) {
 						tmp += ghost[p]
 						lbreak = true
-						// fmt.Println("tmp1: ", tmp)
 					}
 				}
 			}
@@ -70,7 +68,6 @@ func main() {
 		for i := right; i >= 0; i-- {
 			if unicode.IsNumber(rune(n[i])) {
 				tmp += string(n[i])
-				// fmt.Println("tmp2: ", tmp)
 				rbreak = true
 			} else {
 				tmpRight = string(n[i]) + tmpRight
@@ -79,7 +76,6 @@ func main() {
 					if strings.Contains(tmpRight, p) {
 						tmp += ghost[p]
 						rbreak = true
-						// fmt.Println("tmp2: ", tmp)
 					}
 				}
 			}
@@ -87,8 +83,6 @@ func main() {
 				break
 			}
 		}
-
-		fmt.Println("TMP: ", tmp)
 
 		x, _ := strconv.Atoi(tmp)
 		newNums = append(newNums, x)
