@@ -51,7 +51,9 @@ func main() {
 
 	visited[startingPoint] = true
 	checkPosition(startingPoint)
-	scheme[startingPoint] = "|"
+	fmt.Println("farthest point away: ", len(visited)/2)
+
+	scheme[startingPoint] = "|" // replacing S with real character for pt 2 to simplify logic
 
 	checkTiles()
 	fmt.Println("inside tiles: ", inside)
