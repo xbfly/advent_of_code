@@ -12,6 +12,9 @@ type Position struct {
 
 var visited map[Position]bool
 var scheme map[Position]string
+var inside int
+var schemeLength int
+var schemeHeight int
 
 func main() {
 	visited = make(map[Position]bool)
@@ -26,6 +29,9 @@ func main() {
 	i := 0
 	for scanner.Scan() {
 		row := scanner.Text()
+		if schemeLength == 0 {
+			schemeLength = len(scanner.Text())
+		}
 
 		for j := 0; j < len(row); j++ {
 			p := Position{
@@ -41,10 +47,42 @@ func main() {
 		i++
 	}
 
+	schemeHeight = i
+
 	visited[startingPoint] = true
 	checkPosition(startingPoint)
-	fmt.Println("farthest point away: ", len(visited)/2)
+	scheme[startingPoint] = "|"
 
+	checkTiles()
+	fmt.Println("inside tiles: ", inside)
+
+}
+
+func checkTiles() {
+	for r := 0; r < schemeHeight; r++ {
+		for c := 0; c < schemeLength; c++ {
+			n := Position{
+				row: r,
+				col: c,
+			}
+			if visited[n] {
+				continue
+			}
+			count := 0
+			for p := c; p < schemeLength; p++ {
+				p := Position{
+					row: r,
+					col: p,
+				}
+				if visited[p] == true && (scheme[p] == "|" || scheme[p] == "L" || scheme[p] == "J") {
+					count++
+				}
+			}
+			if count%2 != 0 {
+				inside++
+			}
+		}
+	}
 }
 
 func checkPosition(p Position) {
