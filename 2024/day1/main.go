@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	part = flag.String("part", "0", "Which part")
+	part = flag.Int("part", 0, "Which part")
 )
 
 func main() {
@@ -19,10 +19,10 @@ func main() {
 	defer file.Close()
 
 	flag.Parse()
-	if *part == "1" {
+	if *part == 1 {
 		part1(file)
 	}
-	if *part == "2" {
+	if *part == 2 {
 		part2(file)
 	}
 
