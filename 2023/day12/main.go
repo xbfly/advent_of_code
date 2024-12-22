@@ -8,11 +8,14 @@ import (
 	"strings"
 )
 
-var validCombinations int
+var (
+	validCombinations int
+	// Memoization cache for combinations
+	combinationsCache = make(map[[2]int][][]int)
+)
 
 func main() {
-
-	file, _ := os.Open("day12input.txt")
+	file, _ := os.Open("day12inputmod.txt")
 
 	scanner := bufio.NewScanner(file)
 
@@ -26,6 +29,15 @@ func main() {
 		for _, c := range x[0] {
 			ns = append(ns, string(c))
 		}
+
+		sampleNS := make([]string, len(ns))
+		copy(sampleNS, ns)
+		for addLines := 0; addLines < 4; addLines++ {
+			ns = append(ns, "?")
+			for _, al := range sampleNS {
+				ns = append(ns, al)
+			}
+		}
 		lines = append(lines, ns)
 
 		n := strings.Split(x[1], ",")
@@ -34,13 +46,28 @@ func main() {
 			y, _ := strconv.Atoi(d)
 			ms = append(ms, y)
 		}
+
+		sampleMS := make([]int, len(ms))
+		copy(sampleMS, ms)
+		for addNums := 0; addNums < 4; addNums++ {
+			for _, an := range sampleMS {
+				ms = append(ms, an)
+			}
+		}
 		nums = append(nums, ms)
 
 	}
+	// fmt.Println("lines; ", lines)
+	// fmt.Println("nums: ", nums)
 
 	for l := 0; l < len(lines); l++ {
 		n, r, qi := getElements(lines[l], nums[l])
-		allCombinations := combinations(n, r)
+
+		key := [2]int{n, r}
+		if _, ok := combinationsCache[key]; !ok {
+			combinationsCache[key] = combinations(n, r) // Cache the combinations
+		}
+		allCombinations := combinationsCache[key]
 
 		for _, a := range allCombinations {
 			tmpLine := make([]string, len(lines[l]))
@@ -99,6 +126,7 @@ func getElements(s []string, i []int) (n, r int, qIndex []int) {
 
 	n = questions
 	r = sum - hashes
+
 	return n, r, qIndex
 }
 
@@ -114,7 +142,6 @@ func combinations(n, r int) [][]int {
 	var helper func(int, int)
 	helper = func(i, next int) {
 		if i == r {
-			// Create a copy of the slice to avoid overwriting
 			temp := make([]int, r)
 			copy(temp, s)
 			result = append(result, temp)
